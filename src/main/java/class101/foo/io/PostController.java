@@ -47,7 +47,15 @@ public class PostController {
     }
 
     // 3. 글 번호로 조회
+    @GetMapping("/post/{id}")
+    public Post getPost(@PathVariable Long id) {
+        return postRepository.findById(id).get();
+    }
     
     // 4. 글 내용으로 검색 -> 해당 내용이 포함된 모든 글
+    @GetMapping("/posts/search")
+    public List<Post> searchPost(@RequestParam String content) {
+        return postRepository.findByContentContaining(content);
+    }
 
 }
